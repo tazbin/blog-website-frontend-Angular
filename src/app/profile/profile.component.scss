@@ -1,0 +1,29 @@
+.profile{
+    img{
+        width: 100%;
+        max-width: 150px;
+        border-radius: 5px;
+        box-shadow: 3px 3px 7px #cfcfcf;
+    }
+
+    h3{
+        font-weight: 200 !important;
+        margin-bottom: 15px;
+        color: black;
+    }
+    h4{
+        font-weight: 400 !important;
+        font-size: 15px;
+        color: black;
+    }
+
+    .borderLeft{
+        border-left: 1px solid rgb(192, 192, 192);
+
+        p {
+            font-size: 15px;
+            text-align: justify;
+        }
+    }
+
+}

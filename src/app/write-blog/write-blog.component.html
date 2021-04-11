@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="row py-5">
+
+        <p *ngIf="categoryList.loading || categoryList.error">
+            {{ categoryList.error }}
+            {{ categoryList.loading ? 'Loading...' : '' }}
+        </p>
+
+        <div class="col-md-8 col-12" *ngIf="!categoryList.loading && !categoryList.error">
+            <form #blogForm="ngForm" (ngSubmit)="saveBlog()">
+
+                <div class="mb-3">
+                  <label class="form-label">Blog title*</label>
+                  <input type="text" [class.is-invalid]="title.touched && title.invalid" required #title="ngModel" [(ngModel)]="blog.data.title" name="blog" class="form-control">
+                  <small class="text-danger" *ngIf="title.touched && title.invalid">
+                      Fill this fiels
+                  </small>
+                </div>
+
+                <div class="mb-3">
+                <label class="form-label">Select category*</label>
+                <select class="form-select" [class.is-invalid]="categoryId.touched && categoryId.invalid" required #categoryId="ngModel" [(ngModel)]="blog.data.category" name="categoryId">
+                    <option *ngFor="let category of categoryList.items" [value]="category._id">
+                        {{ category.name | titlecase }}
+                    </option>
+                </select>
+                <small class="text-danger" *ngIf="categoryId.touched && categoryId.invalid">
+                    Fill this fiels
+                </small>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Blog body*</label>
+                    <textarea class="form-control" [class.is-invalid]="body.touched && body.invalid" style="height: 100px" required #body="ngModel" [(ngModel)]="blog.data.body" name="body"></textarea>
+                    <small class="text-danger" *ngIf="body.touched && body.invalid">
+                        Fill this fiels
+                    </small>
+                  </div>
+
+                <button type="submit" class="btn btn-dark me-2" [disabled]="blogForm.invalid || blog.loading">
+                    {{ blog.loading ? 'Saving blog...' : 'Save blog' }}
+                </button>
+
+              </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,143 @@
+<div class="img-section">
+    <img src="assets/img/nice.jpg" alt="">
+</div>
+
+<div class="container">
+    <div class="row py-5">
+
+        <div class="col-md-2 col-12">
+            <p class="section-title"> <i class="fa fa-user-circle-o" aria-hidden="true"></i> Author</p>
+            <div class="card">
+                <div class="card-body text-center">
+                    {{ blog.data.writter?.first_name }}
+                  <br>
+                  <div class="d-grid mt-2 gap-2">
+                    <a class="btn btn-sm btn-light" [routerLink]="['/profile', blog.data.writter?._id]">View profile</a>
+                  </div>
+                </div>
+              </div>
+        </div>
+        
+        <div class="col-md-7 col-12">
+
+            <p *ngIf="blog.error || blog.loading">
+                {{ blog.error }}
+                {{ blog.loading ? 'Loading blog...' : '' }}
+            </p>
+
+            <!-- blog -->
+            <p class="section-title"> 
+                {{ blog.data.title | titlecase }}
+            </p>
+            <p>
+                {{ blog.data.body }}
+            </p>
+
+
+            <!-- reacts -->
+            <hr class="mt-4">
+            <div class="react-section" *ngIf="blog.data.reacts">
+                <a class="btn btn-light" [class.reacted]="User.hasReact == 'like'" (click)="doReact('like')">
+                    <i class="fa fa-thumbs-up-o" aria-hidden="true"></i>
+                     Like 
+                     <span class="badge bg-secondary">
+                         {{ blog.data.reacts.like.length }}
+                     </span>
+                </a>
+                <a class="btn btn-light" [class.reacted]="User.hasReact == 'love'" (click)="doReact('love')">
+                    <i class="fa fa-heart-o" aria-hidden="true"></i> 
+                    Love 
+                    <span class="badge bg-secondary">
+                        {{ blog.data.reacts.love.length }}
+                    </span>
+                </a>
+                <a class="btn btn-light" [class.reacted]="User.hasReact == 'funny'" (click)="doReact('funny')">
+                    <i class="fa fa-smile-o" aria-hidden="true"></i> 
+                    Haha 
+                    <span class="badge bg-secondary">
+                        {{ blog.data.reacts.funny.length }}
+                    </span>
+                </a>
+                <a class="btn btn-light" [class.reacted]="User.hasReact == 'sad'" (click)="doReact('sad')">
+                    <i class="fa fa-frown-o" aria-hidden="true"></i> 
+                    Sad
+                    <span class="badge bg-secondary">
+                        {{ blog.data.reacts.sad.length }}
+                    </span>
+                </a>
+                <a class="btn btn-light" [class.reacted]="User.hasReact == 'informative'" (click)="doReact('informative')">
+                    <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+                    Informative 
+                    <span class="badge bg-secondary">
+                        {{ blog.data.reacts.informative.length }}
+                    </span>
+                </a>
+            </div>
+            <hr>
+            
+            <!-- write comment -->
+            <form class="row g-3 mb-3" #commentForm="ngForm" (ngSubmit)="doComment(commentForm)" *ngIf="User.data">
+                <div class="col-md-10 col-8">
+                    <input type="text" [class.is-invalid]="comment.touched && comment.invalid" required #comment="ngModel" [(ngModel)]="postComment.body.body" name="comment" class="form-control" placeholder="Write comment...">
+                    <small class="text-danger" *ngIf="comment.touched && comment.invalid">
+                        <i class="fa fa-exclamation-triangle me-1" aria-hidden="true"></i> Comment must not be empty!
+                    </small>
+                    <small class="text-danger" *ngIf="postComment.error">
+                        <i class="fa fa-exclamation-triangle me-1" aria-hidden="true"></i> {{postComment.error}}
+                    </small>
+                    <small class="text-success" *ngIf="postComment.success">
+                        <i class="fa fa-check me-1" aria-hidden="true"></i> Comment posted!
+                    </small>
+                </div>
+                <div class="col-md-2 col-4">
+                    <button type="submit" class="btn btn-dark mb-3" [disabled]="commentForm.invalid || postComment.loading" style="width: 100%">
+                        {{ postComment.loading ? 'Posting...' : 'Post' }}
+                    </button>
+                </div>
+            </form>
+
+            <!-- blogs comments -->
+            <div class="row comments-section" *ngFor="let comment of blog.data.comments | reverseArray">
+                <div class="col-md-2 col-3">
+                    <div class="img">
+                        <img src="assets/img/user.png" alt="">
+                    </div>
+                </div>
+
+                <div class="col-md-10 col-9">
+                    <h3> <i class="fa fa-comment me-1" aria-hidden="true"></i> 
+                    {{ comment.people.first_name }} {{ comment.people.last_name }}
+                    </h3>
+                    <small> {{ comment.time }} </small>
+                    <p>
+                        {{ comment.body }}
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-3 col-12">
+            <p class="section-title"> <i class="fa fa-list-ul" aria-hidden="true"></i> Blog category</p>
+            <p *ngIf="categories.loading || categories.error">
+              {{ categories.loading ? 'Loading...' : '' }}
+              {{ categories?.error }}
+            </p>
+              <ul class="list-group" *ngIf="!categories.loading && !categories.error">
+                  <li class="list-group-item" routerLink="/all_blogs">
+                      All 
+                      <span class="badge bg-light ms-2">
+                          {{ categories.totalBlogs }}
+                      </span>
+                  </li>
+                  <li class="list-group-item" [routerLink]="['/all_blogs', category._id]" *ngFor="let category of categories.items">
+                      {{ category.name | titlecase }}
+                      <span class="badge bg-light ms-2">
+                          {{ category.count }}
+                      </span>
+                  </li>
+                </ul>
+        </div>
+
+    </div>
+</div>

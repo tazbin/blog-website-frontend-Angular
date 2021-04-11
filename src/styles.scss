@@ -1,0 +1,115 @@
+/* You can add global styles to this file, and also import other style files */
+.bg-light{
+    background-color: #e9ecef !important;
+    border: none;
+}
+
+.bg-dark{
+    background-color: #343a40!important;
+}
+
+.btn-dark{
+    background-color: #343a40!important;
+}
+
+.btn-light{
+    color: #212529;
+    background-color: rgb(238, 238, 238);
+    border: none;
+}
+
+.btn-light:hover{
+    background-color: rgb(231, 227, 227);
+    border: none;
+}
+
+.bg-light {
+    background-color:rgb(226, 226, 226) !important;
+    color: rgb(105, 105, 105) !important
+}
+
+.maxW400{
+    max-width: 400px;
+}
+
+.list-group .list-group-item:hover {
+    background-color: rgb(247, 247, 247);
+    cursor: pointer;
+}
+
+.list-group .list-group-item.active {
+    background-color: #5c5c5c !important;
+    border-color: #5c5c5c !important;
+    color: white !important;
+    cursor: pointer;
+}
+
+.section-title{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.categorySection {
+    li{
+        cursor: pointer;
+    }
+}
+
+.blogs{
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgb(230, 230, 230);
+    margin-bottom: 20px;
+    
+    .img{
+        overflow: hidden;
+        height: 150px !important;
+
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-top-right-radius: 7px;
+            border-top-left-radius: 7px;
+            transition: 0.3s ease-in
+        }
+    }
+    
+    h5{
+        height: 50px;
+        font-size: 18px;
+        a{
+            text-decoration: none;
+            color: black;
+        }
+    }
+    
+    p{
+        font-size: 15px;
+        
+        .fa-user-circle-o {
+            margin-right: 4px;
+        }
+
+        .fa-bookmark{
+            margin-left: 3px;
+            margin-right: 5px;
+        }
+    }
+}
+
+.blogs:hover img{
+    transform: scale(1.1);
+    transition: 0.3s ease-in
+}
+
+.pagination{
+    li a{
+        color: black !important;  
+        cursor: pointer;  
+    }
+    .page-item.active .page-link{
+        background-color: rgb(31, 31, 31) !important;
+        color: white !important;
+        border-color: black;
+    }
+}

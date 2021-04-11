@@ -1,0 +1,78 @@
+<div class="container">
+    <div class="row py-5">
+
+      <div class="col-md-9 col-12" *ngIf="allBlogs.error || allBlogs.loading"> 
+        <p class="section-title"> <i class="fa fa-pencil-square" aria-hidden="true"></i> 
+          Blogs
+        </p>
+        {{ allBlogs?.error }}
+        {{ allBlogs.loading ? 'Loading...' : '' }}
+      </div>
+
+        <div class="col-md-9 col-12" *ngIf="!allBlogs.error && !allBlogs.loading">
+          
+            <div class="row">
+                <p class="section-title"> <i class="fa fa-pencil-square" aria-hidden="true"></i> 
+                  {{ categories.currentCategoryId == 'all' ? 'All' : (allBlogs.items[0].category.name | titlecase) }} topic blogs
+                </p>
+
+                <nav aria-label="...">
+                    <ul class="pagination pagination-sm">
+                      <li class="page-item" [class.active]="(page+1) == allBlogs.currentPage" *ngFor="let page of allBlogs.totalPages">
+                          <a class="page-link" (click)="changePage(page+1)"> {{ page+1 }} </a>
+                        </li>
+                    </ul>
+                  </nav>
+
+                <!-- blogs -->
+                <div class="col-md-4 col-12" *ngFor="let blog of allBlogs.items">
+                    <div class="card blogs" style="width: 100%;">
+                        <div class="img">
+                            <img src="assets/img/nice.jpg" class="card-img-top" alt="...">
+                        </div>
+
+                        <div class="card-body">
+
+                          <h5 class="card-title">
+                              <a [routerLink]="['/blog', blog._id]">
+                              {{ blog.title }}
+                            </a>
+                          </h5>
+                          
+                          <p class="card-text">
+                            <i class="fa fa-user-circle-o" aria-hidden="true"></i> {{ blog.writter.first_name }}
+                            <br>
+                            <i class="fa fa-bookmark" aria-hidden="true"></i> {{ blog.category.name }}
+                          </p>
+                        </div>
+                      </div>
+                </div>
+                <!-- blogs -->
+
+            </div>
+        </div>
+
+        <div class="col-md-3 col-12">
+          <p class="section-title"> <i class="fa fa-list-ul" aria-hidden="true"></i> Blog category</p>
+          <p *ngIf="categories.loading || categories.error">
+            {{ categories.loading ? 'Loading...' : '' }}
+            {{ categories?.error }}
+          </p>
+            <ul class="list-group" *ngIf="!categories.loading && !categories.error">
+                <li class="list-group-item" [class.active]="categories.currentCategoryId == 'all'" routerLink="/all_blogs">
+                    All 
+                    <span class="badge bg-light ms-2">
+                        {{ categories.totalBlogs }}
+                    </span>
+                </li>
+                <li class="list-group-item" [class.active]="categories.currentCategoryId == category._id" [routerLink]="['/all_blogs', category._id]" *ngFor="let category of categories.items">
+                    {{ category.name | titlecase }}
+                    <span class="badge bg-light ms-2">
+                        {{ category.count }}
+                    </span>
+                </li>
+              </ul>
+        </div>
+
+    </div>
+</div>

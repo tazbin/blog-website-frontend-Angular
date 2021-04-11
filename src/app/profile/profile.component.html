@@ -1,0 +1,125 @@
+<div class="card bg-light">
+    <div class="container py-5">
+        <div class="card-body">
+            <p *ngIf="bloggerProfile.loading">
+                Getting blogger data...
+            </p>
+            <small *ngIf="bloggerProfile.error" class="text-danger">
+               <b>ERROR</b> {{ bloggerProfile.error }}!
+            </small>
+            <div class="row profile" *ngIf="!bloggerProfile.error && !bloggerProfile.loading">
+
+                <div class="col-md-2 col-12 my-2">
+                    <img *ngIf="bloggerProfile.data.img" [src]="bloggerProfile.data.img" alt="">
+                    <img *ngIf="!bloggerProfile.data.img" src="assets/img/tazbinur.png" alt="">
+                </div>
+
+                <div class="col-md-4 col-12 my-2" *ngIf="bloggerProfile.data">
+                    <h3>
+                        <b> {{ bloggerProfile.data.first_name }} </b> {{ bloggerProfile.data.last_name }}
+                    </h3>
+                    <h4>
+                        <i class="fa fa-user-circle-o me-1" aria-hidden="true"></i> 
+                        {{ bloggerProfile.data.job ? bloggerProfile.data.job : bloggerProfile.data.role }}
+                    </h4>
+                    <h4>
+                        <i class="fa fa-envelope me-1" aria-hidden="true"></i> {{ bloggerProfile.data.email }}
+                    </h4>
+                    <h4>
+                        <i class="fa fa-calendar-check-o me-1" aria-hidden="true"></i> {{ bloggerProfile.data.joined }}
+                    </h4>
+                    <h4 *ngIf="bloggerProfile.data.address">
+                        <i class="fa fa-map me-1" aria-hidden="true"></i> {{ bloggerProfile.data.address }}
+                    </h4>
+                </div>
+
+                <div class="col-md-6 col-12 my-2 borderLeft">
+                    <p class="d-none d-md-block">
+                        <b>About me:</b> {{ bloggerProfile.data.about }}
+                    </p>
+                    <a *ngIf="(User | async)" routerLink="/write_blog" class="btn btn-sm btn-dark me-2">Write new blog</a>
+                    <a *ngIf="(User | async)" routerLink="/profile_edit" class="btn btn-sm btn-light" routerLink="/profile_edit">Edit profile</a>
+                    <br>
+                </div>
+
+            </div>
+          </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row py-5">
+    
+            <div class="col-md-9 col-12">
+                
+                <p class="section-title"> <i class="fa fa-pencil-square" aria-hidden="true"></i> 
+                    {{ bloggerProfile.data.first_name+"'s" }} blogs
+                </p>
+
+                <nav aria-label="...">
+                    <ul class="pagination pagination-sm">
+                        <li class="page-item" [class.active]="(page+1) == bloggerAllBlogs.currentPage" *ngFor="let page of bloggerAllBlogs.totalPages">
+                            <a class="page-link" (click)="changePage(page+1)"> {{ page+1 }} </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <p *ngIf="bloggerAllBlogs.error || bloggerAllBlogs.loading">
+                    {{ bloggerAllBlogs?.error }}
+                    {{ bloggerAllBlogs.loading ? 'Loading...' : '' }}
+                </p>
+
+                <div class="row" *ngIf="!bloggerAllBlogs.error && !bloggerAllBlogs.loading">
+    
+                    <!-- blogs -->
+                    <div class="col-md-4 col-12" *ngFor="let blog of bloggerAllBlogs.items">
+                        <div class="card blogs" style="width: 100%;">
+                            <div class="img">
+                                <img src="assets/img/nice.jpg" class="card-img-top" alt="...">
+                            </div>
+    
+                            <div class="card-body">
+    
+                              <h5 class="card-title">
+                                  <a [routerLink]="['/blog', blog._id]">
+                                  {{ blog.title }}
+                                </a>
+                              </h5>
+                              
+                              <p class="card-text">
+                                <i class="fa fa-user-circle-o" aria-hidden="true"></i> {{ blog.writter.first_name }}
+                                <br>
+                                <i class="fa fa-bookmark" aria-hidden="true"></i> {{ blog.category.name }}
+                              </p>
+                            </div>
+                          </div>
+                    </div>
+                    <!-- blogs -->
+                </div>
+
+            </div>
+
+        <div class="col-md-3 col-12">
+            <p class="section-title"> <i class="fa fa-list-ul" aria-hidden="true"></i> Blog category</p>
+            <p *ngIf="categories.loading || categories.error">
+              {{ categories.loading ? 'Loading...' : '' }}
+              {{ categories?.error }}
+            </p>
+              <ul class="list-group" *ngIf="!categories.loading && !categories.error">
+                  <li class="list-group-item" [class.active]="categories.currentCategoryId == 'all'" routerLink="/all_blogs">
+                      All 
+                      <span class="badge bg-light ms-2">
+                          {{ categories.totalBlogs }}
+                      </span>
+                  </li>
+                  <li class="list-group-item" [class.active]="categories.currentCategoryId == category._id" [routerLink]="['/all_blogs', category._id]" *ngFor="let category of categories.items">
+                      {{ category.name | titlecase }}
+                      <span class="badge bg-light ms-2">
+                          {{ category.count }}
+                      </span>
+                  </li>
+                </ul>
+        </div>
+
+    </div>
+</div>
