@@ -1,4 +1,20 @@
-# Client2
+# blog-website-frontend_Angular
+
+**blog-website** is one of my personal projects where registered blogger write blogs. Bloggers can also comment or react to blogs. This repository holds the code of it's frontend which is developed using **Angular**.
+
+<em> The backend of this project can be found [here (REST API)](https://github.com/tazbin/blog-website-backend_REST_API/edit/master/README.md). </em>
+
+## Features:
+- bloggers can create their profiles (token based authentication)
+- bloggers can edit their profile
+- bloggers can write posts. They can set the category of their blog (i.e. travel, medical, tech etc)
+- registered bloggers can comment on their own or others blog
+- registered bloggers can also react on others blog. They can react **like**, **love**, **sad**, **haha**, **informative** to blogs
+- unregistred public users can read blogs but cann't comment or react n blogs
+- Blogs of a particular category can be viewed
+
+
+# Client
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.8.
 
