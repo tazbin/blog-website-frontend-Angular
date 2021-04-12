@@ -6,6 +6,7 @@ import { AllBlogsComponent } from './all-blogs/all-blogs.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BlogComponent } from './blog/blog.component';
+import { CategoryComponentComponent } from './common/category-component/category-component.component';
 import { FooterComponent } from './common/footer/footer.component';
 import { NavbarComponent } from './common/navbar/navbar.component';
 import { ContactComponent } from './contact/contact.component';
@@ -16,7 +17,6 @@ import { ProfileComponent } from './profile/profile.component';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { SignupComponent } from './signup/signup.component';
 import { WriteBlogComponent } from './write-blog/write-blog.component';
-import { CategoryComponentComponent } from './common/category-component/category-component.component';
 
 @NgModule({
   declarations: [
