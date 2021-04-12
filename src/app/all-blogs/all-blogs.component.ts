@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AllBlogsModel } from '../interfaces/all-blogs-model';
-import { CategoriesModel } from '../interfaces/categories-model';
-import { AuthService } from '../services/auth.service';
 import { BlogService } from '../services/blog.service';
-import { CategoryService } from '../services/category.service';
 
 @Component({
   selector: 'app-all-blogs',
@@ -23,19 +20,10 @@ export class AllBlogsComponent implements OnInit {
     currentPage: 0
   }
 
-  categories: CategoriesModel = {
-    sub: null,
-    error: null,
-    loading: false,
-    items: [],
-    totalBlogs: 0,
-    currentCategoryId: 'all'
-  }
+  currentCategoryId: 'all';
   
   constructor(
-    private _authService: AuthService,
     private _blogService: BlogService,
-    private _categoryService: CategoryService,
     private _route: ActivatedRoute
     ) { }
     
@@ -43,9 +31,9 @@ export class AllBlogsComponent implements OnInit {
 
       this._route.params.subscribe((params) => {
         if( !params.categoryId ) {
-          this.categories.currentCategoryId = 'all';
+          this.currentCategoryId = 'all';
         } else {
-          this.categories.currentCategoryId = params.categoryId;
+          this.currentCategoryId = params.categoryId;
         }
         this.getAllBlogs();
       });
@@ -56,8 +44,6 @@ export class AllBlogsComponent implements OnInit {
       // }
       // this.getAllBlogs();
 
-    this.getCategorizedBlogsCount();
-
   }
 
   getAllBlogs() {
@@ -65,7 +51,7 @@ export class AllBlogsComponent implements OnInit {
     this.allBlogs.loading = true;
     this.allBlogs.error = null;
     
-    this.allBlogs.sub = this._blogService.getAllBlogs(this.categories.currentCategoryId)
+    this.allBlogs.sub = this._blogService.getAllBlogs(this.currentCategoryId)
     .subscribe((res:any) => {
 
       this.allBlogs.items = res.result;
@@ -85,35 +71,12 @@ export class AllBlogsComponent implements OnInit {
     })
   }
 
-  getCategorizedBlogsCount() {
-    this.categories.loading = true;
-    this.categories.error = null;
-
-    this.categories.sub = this._categoryService.getCategorizedBlogCount()
-    .subscribe((res:any) => {
-
-      this.categories.items = res;
-      this.categories.items.forEach(c => {
-        this.categories.totalBlogs += c.count;
-      });
-      this.categories.loading = false;
-      this.categories.sub.unsubscribe();
-
-    }, err => {
-      
-      this.categories.error = err;
-      this.categories.loading = false;
-      this.categories.sub.unsubscribe();
-
-    })
-  }
-
   changePage(page) {
 
     this.allBlogs.loading = true;
     this.allBlogs.error = null;
 
-    this._blogService.getAllBlogs(this.categories.currentCategoryId, page)
+    this._blogService.getAllBlogs(this.currentCategoryId, page)
     .subscribe((res:any) => {
 
       this.allBlogs.items = res.result;

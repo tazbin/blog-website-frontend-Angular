@@ -100,25 +100,7 @@
             </div>
 
         <div class="col-md-3 col-12">
-            <p class="section-title"> <i class="fa fa-list-ul" aria-hidden="true"></i> Blog category</p>
-            <p *ngIf="categories.loading || categories.error">
-              {{ categories.loading ? 'Loading...' : '' }}
-              {{ categories?.error }}
-            </p>
-              <ul class="list-group" *ngIf="!categories.loading && !categories.error">
-                  <li class="list-group-item" [class.active]="categories.currentCategoryId == 'all'" routerLink="/all_blogs">
-                      All 
-                      <span class="badge bg-light ms-2">
-                          {{ categories.totalBlogs }}
-                      </span>
-                  </li>
-                  <li class="list-group-item" [class.active]="categories.currentCategoryId == category._id" [routerLink]="['/all_blogs', category._id]" *ngFor="let category of categories.items">
-                      {{ category.name | titlecase }}
-                      <span class="badge bg-light ms-2">
-                          {{ category.count }}
-                      </span>
-                  </li>
-                </ul>
+            <app-category-component></app-category-component>
         </div>
 
     </div>

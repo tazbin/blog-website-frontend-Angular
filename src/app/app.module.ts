@@ -16,6 +16,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { SignupComponent } from './signup/signup.component';
 import { WriteBlogComponent } from './write-blog/write-blog.component';
+import { CategoryComponentComponent } from './common/category-component/category-component.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { WriteBlogComponent } from './write-blog/write-blog.component';
     AllBlogsComponent,
     ReverseArrayPipe,
     ProfileEditComponent,
-    ContactComponent
+    ContactComponent,
+    CategoryComponentComponent
   ],
   imports: [
     BrowserModule,
