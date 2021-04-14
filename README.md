@@ -7,7 +7,7 @@
 ## Features:
 - bloggers can create their profiles (token based authentication)
 - bloggers can edit their profile
-- bloggers can write posts. They can set the category of their blog (i.e. travel, medical, tech etc)
+- bloggers can write blogs. They can set the category of their blog (i.e. travel, medical, tech etc)
 - registered bloggers can comment on their own or others blog
 - registered bloggers can also react on others blog. They can react **like**, **love**, **sad**, **haha**, **informative** to blogs
 - unregistred public users can read blogs but cann't comment or react n blogs
