@@ -85,21 +85,21 @@ export class ProfileEditComponent implements OnInit {
     })
   }
 
-  fileChangeEvent(e) {
-    let me = this;
+  // fileChangeEvent(e) {
+  //   let me = this;
 
-    let file = e.target.files[0];
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
+  //   let file = e.target.files[0];
+  //   let reader = new FileReader();
+  //   reader.readAsDataURL(file);
 
-    reader.onload = function () {
-      me.user.data.img = reader.result;
-    };
-    reader.onerror = function (error) {
-      me.imgErr = error;
-      console.log('Error: ', error);
-    };
+  //   reader.onload = function () {
+  //     me.user.data.img = reader.result;
+  //   };
+  //   reader.onerror = function (error) {
+  //     me.imgErr = error;
+  //     console.log('Error: ', error);
+  //   };
     
-  }
+  // }
 
 }

@@ -10,8 +10,8 @@
             <div class="row profile" *ngIf="!bloggerProfile.error && !bloggerProfile.loading">
 
                 <div class="col-md-2 col-12 my-2">
-                    <img *ngIf="bloggerProfile.data.img" [src]="bloggerProfile.data.img" alt="">
-                    <img *ngIf="!bloggerProfile.data.img" src="assets/img/tazbinur.png" alt="">
+                    <!-- <img *ngIf="bloggerProfile.data.img" [src]="bloggerProfile.data.img" alt=""> -->
+                    <img src="assets/img/tazbinur.png" alt="">
                 </div>
 
                 <div class="col-md-4 col-12 my-2" *ngIf="bloggerProfile.data">
