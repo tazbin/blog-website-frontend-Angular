@@ -16,16 +16,20 @@
     </p>
     <div class="row py-5" *ngIf="!user.loading && !user.error">
         <div class="col-md-8 col-12">
-            <form class="row g-3" #editForm="ngForm" (ngSubmit)="editProfile()">
+            <form class="row g-3" enctype='multipart/form-data' #editForm="ngForm" (ngSubmit)="editProfile()">
+                
+                <div class="imgCap" *ngIf="user.data.img">
+                    <img [src]="this.user.data.img" class="imagepreview" alt="">
+                </div>
 
-
-                <!-- <div class="mb-3">
-                    <label for="formFileSm" class="form-label">Change profile picture</label>
-                    <input class="form-control form-control-sm" type="file" (change)="fileChangeEvent($event)">
-                    <small class="text-danger" *ngIf="imgErr">
-                        {{ imgErr }}
+                <div class="mb-3">
+                    <label for="formFileSm" class="form-label">
+                        {{ user.data.img ? 'Change profile picture': 'Upload profile picture' }}
+                    </label>
+                    <input class="form-control form-control-sm" type="file" accept="image/*" (change)="fileChangeEvent($event)">
+                    <small class="text-danger">
                     </small>
-                </div> -->
+                </div>
 
                 <div class="col-md-6 col-12 mb-3">
                   <label class="form-label">First name*</label>

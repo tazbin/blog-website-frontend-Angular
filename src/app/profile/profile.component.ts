@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { AllBlogsModel } from '../interfaces/all-blogs-model';
 import { User } from '../interfaces/user';
 import { UserProfile } from '../interfaces/user-profile';
@@ -69,6 +70,7 @@ export class ProfileComponent implements OnInit {
     .subscribe((res: any) => {
 
       this.bloggerProfile.data = res;
+      this.bloggerProfile.data.img = environment.apiUrl +'/' +this.bloggerProfile.data.img;
       this.bloggerProfile.loading = false;
       this.bloggerProfile.sub.unsubscribe();
       
