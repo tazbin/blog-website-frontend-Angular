@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-.bg-light{
-    background-color: #e9ecef !important;
-    border: none;
+.bgLight{
+    background-color: #e9ecef!important;
+    border: none
 }
 
 .bg-dark{
@@ -112,4 +112,8 @@
         color: white !important;
         border-color: black;
     }
+}
+
+.blogSection{
+    min-height: 600px;
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { AllBlogsModel } from '../interfaces/all-blogs-model';
 import { BlogService } from '../services/blog.service';
 
@@ -10,6 +11,7 @@ import { BlogService } from '../services/blog.service';
 })
 export class AllBlogsComponent implements OnInit {
 
+  apiUrl;
   allBlogs: AllBlogsModel = {
     sub: null,
     error: null,
@@ -20,7 +22,7 @@ export class AllBlogsComponent implements OnInit {
     currentPage: 0
   }
 
-  currentCategoryId: 'all';
+  currentCategoryId: string = 'all';
   
   constructor(
     private _blogService: BlogService,
@@ -29,18 +31,20 @@ export class AllBlogsComponent implements OnInit {
     
   ngOnInit(): void {
 
+      this.apiUrl = environment.apiUrl + '/';
+      
       this._route.params.subscribe((params) => {
         if( !params.categoryId ) {
           this.currentCategoryId = 'all';
         } else {
           this.currentCategoryId = params.categoryId;
         }
-        this.getAllBlogs();
       });
+      this.getAllBlogs();
 
-      // this.categoryId = this._route.snapshot.paramMap.get('categoryId');
-      // if( !this.categoryId ) {
-      //   this.categoryId = 'all'
+      // this.currentCategoryId = this._route.snapshot.paramMap.get('categoryId');
+      // if( !this.currentCategoryId ) {
+      //   this.currentCategoryId = 'all'
       // }
       // this.getAllBlogs();
 

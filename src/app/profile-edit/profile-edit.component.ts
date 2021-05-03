@@ -78,6 +78,9 @@ export class ProfileEditComponent implements OnInit {
     formData.append('email', this.user.data.email);
     formData.append('first_name', this.user.data.first_name);
     formData.append('last_name', this.user.data.last_name);
+    formData.append('job', this.user.data.job);
+    formData.append('address', this.user.data.address);
+    formData.append('about', this.user.data.about);
     if( this.image ) {
       formData.append('img', this.image);
     }

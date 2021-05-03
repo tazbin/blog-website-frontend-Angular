@@ -7,7 +7,20 @@
         </p>
 
         <div class="col-md-8 col-12" *ngIf="!categoryList.loading && !categoryList.error">
-            <form #blogForm="ngForm" (ngSubmit)="saveBlog()">
+            <form #blogForm="ngForm" (ngSubmit)="saveBlog()" enctype='multipart/form-data'>
+
+                <div class="imgCap" *ngIf="blog.data.img">
+                    <img [src]="blog.data.img" class="imagepreview" alt="">
+                </div>
+
+                <div class="mb-3">
+                    <label for="formFileSm" class="form-label">
+                        {{ blog.data.img ? 'Change image' : 'Upload image' }}
+                    </label>
+                    <input class="form-control form-control-sm" type="file" accept="image/*" (change)="fileChangeEvent($event)">
+                    <small class="text-danger">
+                    </small>
+                </div>
 
                 <div class="mb-3">
                   <label class="form-label">Blog title*</label>

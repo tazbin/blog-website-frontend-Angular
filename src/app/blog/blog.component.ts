@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { BlogDetailsModel } from '../interfaces/blog-details-model';
 import { PostComment } from '../interfaces/post-comment';
 import { PostReact } from '../interfaces/post-react';
@@ -14,6 +15,7 @@ import { BlogService } from '../services/blog.service';
 })
 export class BlogComponent implements OnInit {
 
+  apiUrl;
   blog: BlogDetailsModel = {
     sub: null,
     error: null,
@@ -62,6 +64,8 @@ export class BlogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+    this.apiUrl = environment.apiUrl + '/';
 
     this.User.loading = true;
     this.User.error = null;

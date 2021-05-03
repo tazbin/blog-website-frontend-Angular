@@ -1,5 +1,6 @@
 <div class="img-section">
-    <img src="assets/img/nice.jpg" alt="">
+    <img *ngIf="blog.data.img" [src]="apiUrl + blog.data.img" alt="">
+    <img *ngIf="!blog.data.img" src="assets/img/nice.jpg" alt="">
 </div>
 
 <div class="container">
@@ -100,7 +101,8 @@
             <div class="row comments-section" *ngFor="let comment of blog.data.comments | reverseArray">
                 <div class="col-md-2 col-3">
                     <div class="img">
-                        <img src="assets/img/user.png" alt="">
+                        <img *ngIf="comment.people.img" [src]="apiUrl + comment.people.img" alt="">
+                        <img *ngIf="!comment.people.img" src="assets/img/user.png" alt="">
                     </div>
                 </div>
 

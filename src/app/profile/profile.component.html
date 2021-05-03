@@ -1,4 +1,4 @@
-<div class="card bg-light">
+<div class="card bgLight">
     <div class="container py-5">
         <div class="card-body">
             <p *ngIf="bloggerProfile.loading">
@@ -11,8 +11,9 @@
 
                 <div class="col-md-2 col-12 my-2">
                     <!-- <img *ngIf="bloggerProfile.data.img" [src]="bloggerProfile.data.img" alt=""> -->
+                   
                     <div class="imgCap">
-                        <img *ngIf="bloggerProfile.data.img" [src]="bloggerProfile.data.img" alt="">
+                        <img *ngIf="bloggerProfile.data.img" [src]="apiUrl + bloggerProfile.data.img" alt="">
                         <img *ngIf="!bloggerProfile.data.img" src="assets/img/avatar.png" alt="">
                     </div>
                 </div>
@@ -50,7 +51,7 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container blogSection">
     <div class="row py-5">
     
             <div class="col-md-9 col-12">
@@ -75,10 +76,15 @@
                 <div class="row" *ngIf="!bloggerAllBlogs.error && !bloggerAllBlogs.loading">
     
                     <!-- blogs -->
+                    <p *ngIf="!bloggerAllBlogs.items.length">
+                        No blogs found!
+                      </p>
+
                     <div class="col-md-4 col-12" *ngFor="let blog of bloggerAllBlogs.items">
                         <div class="card blogs" style="width: 100%;">
                             <div class="img">
-                                <img src="assets/img/nice.jpg" class="card-img-top" alt="...">
+                                <img *ngIf="blog.img" [src]="apiUrl + blog.img" class="card-img-top">
+                                <img *ngIf="!blog.img" src="assets/img/nice.jpg" class="card-img-top">
                             </div>
     
                             <div class="card-body">

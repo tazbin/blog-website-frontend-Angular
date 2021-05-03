@@ -13,6 +13,7 @@ import { CategoryService } from '../services/category.service';
 })
 export class WriteBlogComponent implements OnInit {
 
+  apiUrl;
   categoryList: CategoryList = {
     sub: null,
     error: null,
@@ -27,9 +28,12 @@ export class WriteBlogComponent implements OnInit {
     data: {
         title: null,
         category: null,
-        body: null
+        body: null,
+        img: null
     }
   };
+
+  image;
 
   constructor(
     private _authService: AuthService,
@@ -45,8 +49,16 @@ export class WriteBlogComponent implements OnInit {
   saveBlog() {
     this.blog.loading = true;
     this.blog.error = null;
+
+    const formData = new FormData();
+    formData.append('title', this.blog.data.title);
+    formData.append('category', this.blog.data.category);
+    formData.append('body', this.blog.data.body);
+    if( this.image ) {
+      formData.append('img', this.image);
+    }
     
-    this.blog.sub = this._blogService.writeBlog(this.blog.data)
+    this.blog.sub = this._blogService.writeBlog(formData)
     .subscribe((res:any) => {
 
       this._router.navigate(['/blog', res._id])
@@ -80,6 +92,21 @@ export class WriteBlogComponent implements OnInit {
       this.categoryList.sub.unsubscribe();
 
     })
+  }
+
+  fileChangeEvent(e) {
+    if( e.target.files.length > 0 ) {
+      this.image = e.target.files[0];
+      
+      const file = (e.target as HTMLInputElement).files[0];
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.blog.data.img = reader.result as string;
+      }
+      reader.readAsDataURL(file)
+
+    }
   }
 
 }

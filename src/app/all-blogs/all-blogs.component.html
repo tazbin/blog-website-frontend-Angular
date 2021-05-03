@@ -1,8 +1,9 @@
-<div class="container">
+<div class="container blogSection">
     <div class="row py-5">
 
         <div class="col-md-9 col-12">
           
+          {{ allBlogs | json }}
             <div class="row">
                 <p class="section-title"> <i class="fa fa-pencil-square" aria-hidden="true"></i> 
                   {{ currentCategoryId == 'all' ? 'All' : (allBlogs.items[0].category.name | titlecase) }} topic blogs
@@ -23,10 +24,16 @@
 
                 <!-- blogs -->
                 <div class="row" *ngIf="!allBlogs.error && !allBlogs.loading">
+
+                  <p *ngIf="!allBlogs.items.length">
+                    No blogs found!
+                  </p>
+
                   <div class="col-md-4 col-12" *ngFor="let blog of allBlogs.items">
                       <div class="card blogs" style="width: 100%;">
                           <div class="img">
-                              <img src="assets/img/nice.jpg" class="card-img-top" alt="...">
+                              <img *ngIf="!blog.img" src="assets/img/nice.jpg" class="card-img-top">
+                              <img *ngIf="blog.img" [src]="apiUrl + blog.img" class="card-img-top">
                           </div>
 
                           <div class="card-body">

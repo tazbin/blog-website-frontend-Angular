@@ -15,6 +15,7 @@ import { BlogService } from '../services/blog.service';
 })
 export class ProfileComponent implements OnInit {
 
+  apiUrl;
   User: Observable<User>;
   bloggerProfile: UserProfile = {
     sub: null,
@@ -52,6 +53,7 @@ export class ProfileComponent implements OnInit {
     
   ngOnInit(): void {
 
+    this.apiUrl = environment.apiUrl + '/';
     this.User = this._authService.$User;
 
     this.bloggerProfile.data._id = this._route.snapshot.paramMap.get('bloggerId');
@@ -70,7 +72,7 @@ export class ProfileComponent implements OnInit {
     .subscribe((res: any) => {
 
       this.bloggerProfile.data = res;
-      this.bloggerProfile.data.img = environment.apiUrl +'/' +this.bloggerProfile.data.img;
+      this.bloggerProfile.data.img = this.bloggerProfile.data.img;
       this.bloggerProfile.loading = false;
       this.bloggerProfile.sub.unsubscribe();
       

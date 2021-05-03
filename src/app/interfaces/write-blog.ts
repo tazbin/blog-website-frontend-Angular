@@ -7,6 +7,7 @@ export interface WriteBlog {
     data: {
         title: string,
         category: string,
-        body: string
+        body: string,
+        img: string,
     }
 }
