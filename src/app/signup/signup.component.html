@@ -15,8 +15,8 @@
                         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum assumenda unde animi, corporis natus, obcaecati labore similique perspiciatis optio eos, velit ipsa deleniti vero. Asperiores expedita non dicta. Quidem, officia.
                     </small>
                     <hr>
-                    <button class="btn btn-dark me-3">Read blogs</button>
-                    <a class="btn btn-light" routerLink="/login">Log in</a>
+                    <button class="btn btn-dark me-3" routerLink="/all_blogs">Read blogs</button>
+                    <a class="btn btnLight" routerLink="/login">Log in</a>
                 </div>
 
                 <div class="col-md-4 col-12">
@@ -62,7 +62,7 @@
                           <button class="btn btn-dark" type="submit" [disabled]="signupForm.invalid || signupData.loading">
                               {{ signupData.loading ? 'Signing up...' : 'Signup for free' }}
                           </button>
-                          <a class="btn btn-sm btn-light" routerLink="/login">
+                          <a class="btn btn-sm btnLight" routerLink="/login">
                               Already have an account? Login
                           </a>
                         </div>

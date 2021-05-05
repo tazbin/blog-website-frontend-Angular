@@ -1,19 +1,20 @@
 <div class="img-section">
-    <img *ngIf="blog.data.img" [src]="apiUrl + blog.data.img" alt="">
-    <img *ngIf="!blog.data.img" src="assets/img/nice.jpg" alt="">
+    <img [src]="blog.data.img" alt="">
 </div>
 
 <div class="container">
     <div class="row py-5">
 
-        <div class="col-md-2 col-12">
+        <div class="col-md-2 col-12 author">
             <p class="section-title"> <i class="fa fa-user-circle-o" aria-hidden="true"></i> Author</p>
             <div class="card">
                 <div class="card-body text-center">
-                    {{ blog.data.writter?.first_name }}
+                    <b>
+                        {{ blog.data.writter?.first_name }}
+                    </b>
                   <br>
                   <div class="d-grid mt-2 gap-2">
-                    <a class="btn btn-sm btn-light" [routerLink]="['/profile', blog.data.writter?._id]">View profile</a>
+                    <a class="btn btn-sm" [routerLink]="['/profile', blog.data.writter?._id]">View profile</a>
                   </div>
                 </div>
               </div>
@@ -30,7 +31,7 @@
             <p class="section-title"> 
                 {{ blog.data.title | titlecase }}
             </p>
-            <p>
+            <p class="blogBody">
                 {{ blog.data.body }}
             </p>
 
@@ -38,35 +39,35 @@
             <!-- reacts -->
             <hr class="mt-4">
             <div class="react-section" *ngIf="blog.data.reacts">
-                <a class="btn btn-light" [class.reacted]="User.hasReact == 'like'" (click)="doReact('like')">
+                <a class="btn reactBtn" [class.reacted]="User.hasReact == 'like'" (click)="doReact('like')">
                     <i class="fa fa-thumbs-up-o" aria-hidden="true"></i>
                      Like 
                      <span class="badge bg-secondary">
                          {{ blog.data.reacts.like.length }}
                      </span>
                 </a>
-                <a class="btn btn-light" [class.reacted]="User.hasReact == 'love'" (click)="doReact('love')">
+                <a class="btn reactBtn" [class.reacted]="User.hasReact == 'love'" (click)="doReact('love')">
                     <i class="fa fa-heart-o" aria-hidden="true"></i> 
                     Love 
                     <span class="badge bg-secondary">
                         {{ blog.data.reacts.love.length }}
                     </span>
                 </a>
-                <a class="btn btn-light" [class.reacted]="User.hasReact == 'funny'" (click)="doReact('funny')">
+                <a class="btn reactBtn" [class.reacted]="User.hasReact == 'funny'" (click)="doReact('funny')">
                     <i class="fa fa-smile-o" aria-hidden="true"></i> 
                     Haha 
                     <span class="badge bg-secondary">
                         {{ blog.data.reacts.funny.length }}
                     </span>
                 </a>
-                <a class="btn btn-light" [class.reacted]="User.hasReact == 'sad'" (click)="doReact('sad')">
+                <a class="btn reactBtn" [class.reacted]="User.hasReact == 'sad'" (click)="doReact('sad')">
                     <i class="fa fa-frown-o" aria-hidden="true"></i> 
                     Sad
                     <span class="badge bg-secondary">
                         {{ blog.data.reacts.sad.length }}
                     </span>
                 </a>
-                <a class="btn btn-light" [class.reacted]="User.hasReact == 'informative'" (click)="doReact('informative')">
+                <a class="btn reactBtn" [class.reacted]="User.hasReact == 'informative'" (click)="doReact('informative')">
                     <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
                     Informative 
                     <span class="badge bg-secondary">
@@ -101,14 +102,15 @@
             <div class="row comments-section" *ngFor="let comment of blog.data.comments | reverseArray">
                 <div class="col-md-2 col-3">
                     <div class="img">
-                        <img *ngIf="comment.people.img" [src]="apiUrl + comment.people.img" alt="">
-                        <img *ngIf="!comment.people.img" src="assets/img/user.png" alt="">
+                        <img [src]="apiUrl + comment.people.img" alt="">
                     </div>
                 </div>
 
                 <div class="col-md-10 col-9">
                     <h3> <i class="fa fa-comment me-1" aria-hidden="true"></i> 
-                    {{ comment.people.first_name }} {{ comment.people.last_name }}
+                    <b>
+                        {{ comment.people.first_name }} {{ comment.people.last_name }}
+                    </b>
                     </h3>
                     <small> {{ comment.time }} </small>
                     <p>

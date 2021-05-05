@@ -6,7 +6,7 @@
             {{ categoryList.loading ? 'Loading...' : '' }}
         </p>
 
-        <div class="col-md-8 col-12" *ngIf="!categoryList.loading && !categoryList.error">
+        <div class="col-md-6 col-12" *ngIf="!categoryList.loading && !categoryList.error">
             <form #blogForm="ngForm" (ngSubmit)="saveBlog()" enctype='multipart/form-data'>
 
                 <div class="imgCap" *ngIf="blog.data.img">

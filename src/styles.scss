@@ -1,7 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: logo;
+    src: url(assets/fonts/MontserratSubrayada-Bold.ttf);
+    src: url(assets/fonts/MontserratSubrayada-Regular.ttf);
+}
+  
+@font-face {
+    font-family: roboto;
+    src: url(assets/fonts/RobotoCondensed-Light.ttf),
+    url(assets/fonts/RobotoCondensed-BoldItalic.ttf),
+    url(assets/fonts/RobotoCondensed-Italic.ttf),
+    url(assets/fonts/RobotoCondensed-Light.ttf),
+    url(assets/fonts/RobotoCondensed-LightItalic.ttf),
+    url(assets/fonts/RobotoCondensed-Regular.ttf);
+}
+
+html, body{
+    font-family: roboto;
+}
+
+.navbar .navbar-brand{
+    font-family: logo;
+}
+
 .bgLight{
     background-color: #e9ecef!important;
     border: none
+}
+
+.btnLight{
+    color: #000000;
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+}
+
+.btnLight:hover{
+    color: #030303;
+    background-color: #ffffff;
+    border-color: #ffffff;
 }
 
 .bg-dark{
@@ -12,36 +48,12 @@
     background-color: #343a40!important;
 }
 
-.btn-light{
-    color: #212529;
-    background-color: rgb(238, 238, 238);
-    border: none;
-}
-
-.btn-light:hover{
-    background-color: rgb(231, 227, 227);
-    border: none;
-}
-
-.bg-light {
-    background-color:rgb(226, 226, 226) !important;
-    color: rgb(105, 105, 105) !important
+label{
+    font-weight: bold;
 }
 
 .maxW400{
     max-width: 400px;
-}
-
-.list-group .list-group-item:hover {
-    background-color: rgb(247, 247, 247);
-    cursor: pointer;
-}
-
-.list-group .list-group-item.active {
-    background-color: #5c5c5c !important;
-    border-color: #5c5c5c !important;
-    color: white !important;
-    cursor: pointer;
 }
 
 .section-title{
@@ -77,6 +89,7 @@
     h5{
         height: 50px;
         font-size: 18px;
+        font-weight: bold;
         a{
             text-decoration: none;
             color: black;

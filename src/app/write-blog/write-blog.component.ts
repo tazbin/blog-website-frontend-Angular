@@ -5,6 +5,7 @@ import { WriteBlog } from '../interfaces/write-blog';
 import { AuthService } from '../services/auth.service';
 import { BlogService } from '../services/blog.service';
 import { CategoryService } from '../services/category.service';
+import { UtilsService } from '../services/utils.service';
 
 @Component({
   selector: 'app-write-blog',
@@ -39,7 +40,8 @@ export class WriteBlogComponent implements OnInit {
     private _authService: AuthService,
     private _categorySerice: CategoryService,
     private _blogService: BlogService,
-    private _router: Router
+    private _router: Router,
+    private _utils: UtilsService
   ) { }
 
   ngOnInit(): void {
@@ -50,6 +52,7 @@ export class WriteBlogComponent implements OnInit {
     this.blog.loading = true;
     this.blog.error = null;
 
+    this.blog.data = this._utils.trimObject(this.blog.data);
     const formData = new FormData();
     formData.append('title', this.blog.data.title);
     formData.append('category', this.blog.data.category);

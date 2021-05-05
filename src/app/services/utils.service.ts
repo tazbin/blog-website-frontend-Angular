@@ -12,7 +12,8 @@ export class UtilsService {
 
   trimObject(Obj) {
     for(let k in Obj ) {
-      Obj[k] = Obj[k].replace(/\s/g, "");
+      // Obj[k] = Obj[k].replace(/\s/g, "");
+      Obj[k] = Obj[k].trim();
     }
     return Obj;
   }

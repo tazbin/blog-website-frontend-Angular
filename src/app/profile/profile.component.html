@@ -10,11 +10,9 @@
             <div class="row profile" *ngIf="!bloggerProfile.error && !bloggerProfile.loading">
 
                 <div class="col-md-2 col-12 my-2">
-                    <!-- <img *ngIf="bloggerProfile.data.img" [src]="bloggerProfile.data.img" alt=""> -->
-                   
+
                     <div class="imgCap">
-                        <img *ngIf="bloggerProfile.data.img" [src]="apiUrl + bloggerProfile.data.img" alt="">
-                        <img *ngIf="!bloggerProfile.data.img" src="assets/img/avatar.png" alt="">
+                        <img [src]="bloggerProfile.data.img" alt="Blogger image">
                     </div>
                 </div>
 
@@ -38,7 +36,7 @@
                 </div>
 
                 <div class="col-md-6 col-12 my-2 borderLeft">
-                    <p class="d-none d-md-block">
+                    <p class="d-none d-md-block" *ngIf="bloggerProfile.data.about">
                         <b>About me:</b> {{ bloggerProfile.data.about }}
                     </p>
                     <a *ngIf="(User | async)" routerLink="/write_blog" class="btn btn-sm btn-dark me-2">Write new blog</a>
@@ -56,7 +54,7 @@
     
             <div class="col-md-9 col-12">
                 
-                <p class="section-title"> <i class="fa fa-pencil-square" aria-hidden="true"></i> 
+                <p class="section-title"> <i class="fa fa-paperclip me-2" aria-hidden="true"></i> 
                     {{ bloggerProfile.data.first_name+"'s" }} blogs
                 </p>
 
@@ -83,8 +81,7 @@
                     <div class="col-md-4 col-12" *ngFor="let blog of bloggerAllBlogs.items">
                         <div class="card blogs" style="width: 100%;">
                             <div class="img">
-                                <img *ngIf="blog.img" [src]="apiUrl + blog.img" class="card-img-top">
-                                <img *ngIf="!blog.img" src="assets/img/nice.jpg" class="card-img-top">
+                                <img [src]="blog.img" class="card-img-top">
                             </div>
     
                             <div class="card-body">
@@ -109,7 +106,7 @@
             </div>
 
         <div class="col-md-3 col-12">
-            <app-category-component></app-category-component>
+            <app-category-component [catId]="'no id'"></app-category-component>
         </div>
 
     </div>

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { environment } from 'src/environments/environment';
 import { AllBlogsModel } from '../interfaces/all-blogs-model';
 import { BlogService } from '../services/blog.service';
 
@@ -30,8 +29,6 @@ export class AllBlogsComponent implements OnInit {
     ) { }
     
   ngOnInit(): void {
-
-      this.apiUrl = environment.apiUrl + '/';
       
       this._route.params.subscribe((params) => {
         if( !params.categoryId ) {
@@ -39,8 +36,8 @@ export class AllBlogsComponent implements OnInit {
         } else {
           this.currentCategoryId = params.categoryId;
         }
+        this.getAllBlogs();
       });
-      this.getAllBlogs();
 
       // this.currentCategoryId = this._route.snapshot.paramMap.get('categoryId');
       // if( !this.currentCategoryId ) {

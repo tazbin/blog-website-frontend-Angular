@@ -1,0 +1,23 @@
+.list-group .list-group-item {
+
+    span{
+        background-color: rgb(150, 150, 150) !important;
+    }
+}
+
+.list-group .list-group-item:hover {
+    background-color: rgb(247, 247, 247);
+    cursor: pointer;
+}
+
+.list-group .list-group-item.active {
+    background-color: #5c5c5c !important;
+    border-color: #5c5c5c !important;
+    color: white !important;
+    cursor: pointer;
+
+    span{
+        color: black !important;
+        background-color: white !important;
+    }
+}

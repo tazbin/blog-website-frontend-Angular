@@ -2,10 +2,12 @@
     <div class="row py-5">
 
         <div class="col-md-9 col-12">
+          <p *ngIf="!allBlogs.items.length">
+            No blog found for the selected category!
+          </p>
           
-          {{ allBlogs | json }}
-            <div class="row">
-                <p class="section-title"> <i class="fa fa-pencil-square" aria-hidden="true"></i> 
+            <div class="row" *ngIf="allBlogs.items.length">
+                <p class="section-title"> <i class="fa fa-paperclip me-2" aria-hidden="true"></i> 
                   {{ currentCategoryId == 'all' ? 'All' : (allBlogs.items[0].category.name | titlecase) }} topic blogs
                 </p>
 
@@ -32,8 +34,7 @@
                   <div class="col-md-4 col-12" *ngFor="let blog of allBlogs.items">
                       <div class="card blogs" style="width: 100%;">
                           <div class="img">
-                              <img *ngIf="!blog.img" src="assets/img/nice.jpg" class="card-img-top">
-                              <img *ngIf="blog.img" [src]="apiUrl + blog.img" class="card-img-top">
+                              <img [src]="blog.img" class="card-img-top">
                           </div>
 
                           <div class="card-body">

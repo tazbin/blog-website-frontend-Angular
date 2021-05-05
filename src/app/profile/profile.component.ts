@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { AllBlogsModel } from '../interfaces/all-blogs-model';
 import { User } from '../interfaces/user';
 import { UserProfile } from '../interfaces/user-profile';
@@ -15,7 +14,6 @@ import { BlogService } from '../services/blog.service';
 })
 export class ProfileComponent implements OnInit {
 
-  apiUrl;
   User: Observable<User>;
   bloggerProfile: UserProfile = {
     sub: null,
@@ -53,7 +51,6 @@ export class ProfileComponent implements OnInit {
     
   ngOnInit(): void {
 
-    this.apiUrl = environment.apiUrl + '/';
     this.User = this._authService.$User;
 
     this.bloggerProfile.data._id = this._route.snapshot.paramMap.get('bloggerId');

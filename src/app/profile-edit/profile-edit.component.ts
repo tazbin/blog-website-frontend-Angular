@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
 import { AuthService } from '../services/auth.service';
 import { UtilsService } from '../services/utils.service';
 
@@ -44,8 +43,6 @@ export class ProfileEditComponent implements OnInit {
     ) { }
     
     ngOnInit(): void {
-
-      this.apiUrl = environment.apiUrl;
       
       this.user.loading = true;
       this.user.error = null;
@@ -55,7 +52,6 @@ export class ProfileEditComponent implements OnInit {
         
         res = this._utils.makeObjectSelected(res, ['img', 'first_name', 'last_name', 'email', 'address', 'about', 'job']);
         this.user.data = res;
-        this.user.data.img = environment.apiUrl + '/' + this.user.data.img;
         this.user.loading = false;
         this.user.sub.unsubscribe();
         
@@ -73,6 +69,8 @@ export class ProfileEditComponent implements OnInit {
     
     this.editUser.loading = true;
     this.editUser.error = null;
+
+    this.user.data = this._utils.trimObject(this.user.data);
 
     const formData = new FormData();
     formData.append('email', this.user.data.email);
