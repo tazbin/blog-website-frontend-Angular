@@ -39,12 +39,6 @@ export class AllBlogsComponent implements OnInit {
         this.getAllBlogs();
       });
 
-      // this.currentCategoryId = this._route.snapshot.paramMap.get('categoryId');
-      // if( !this.currentCategoryId ) {
-      //   this.currentCategoryId = 'all'
-      // }
-      // this.getAllBlogs();
-
   }
 
   getAllBlogs() {

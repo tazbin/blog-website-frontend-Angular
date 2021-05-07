@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { BlogDetailsModel } from '../interfaces/blog-details-model';
@@ -13,7 +13,7 @@ import { BlogService } from '../services/blog.service';
   templateUrl: './blog.component.html',
   styleUrls: ['./blog.component.scss']
 })
-export class BlogComponent implements OnInit {
+export class BlogComponent implements OnInit, OnDestroy {
 
   apiUrl;
   blog: BlogDetailsModel = {
@@ -67,6 +67,18 @@ export class BlogComponent implements OnInit {
 
     this.apiUrl = environment.apiUrl + '/';
 
+    this.getLoggedInUserData();
+    this.blog.blogId = this._route.snapshot.paramMap.get('blogId');
+    this.getBlogDetails(this.blog.blogId);
+
+  }
+
+  ngOnDestroy() {
+    this.User.sub.unsubscribe();
+  }
+
+
+  getLoggedInUserData(){
     this.User.loading = true;
     this.User.error = null;
     this.User.sub = this._authService.$User
@@ -77,22 +89,25 @@ export class BlogComponent implements OnInit {
       this.User.loading = false;
       this.User.error = err;
     })
-
-    this.blog.blogId = this._route.snapshot.paramMap.get('blogId');
-
-    this.getBlogDetails(this.blog.blogId);
-
   }
 
   getBlogDetails(blogId) {
-    this._blogService.getBlogDetails(blogId)
+
+    this.blog.error = null;
+    this.blog.loading = true;
+
+    this.blog.sub = this._blogService.getBlogDetails(blogId)
     .subscribe(res => {
 
       this.blog.data = res;
+      this.blog.loading = false;
       this.checkHasReact();
+      this.blog.sub.unsubscribe();
 
     }, err => {
-      console.log(err)
+      this.blog.error = err;
+      this.blog.loading = false;
+      this.blog.sub.unsubscribe();
     });
   }
 
@@ -151,40 +166,18 @@ export class BlogComponent implements OnInit {
   }
 
   checkHasReact() {
-    let r = [];
-
-    r = this.blog.data.reacts.like.filter(e => e== this.User.data._id);
-    if( r.length > 0 ) {
-      this.User.hasReact = 'like';
-      return;
-    }
-
-    r = this.blog.data.reacts.love.filter(e => e== this.User.data._id);
-    if( r.length > 0 ) {
-      this.User.hasReact = 'love';
-      return;
-    }
-
-    r = this.blog.data.reacts.funny.filter(e => e== this.User.data._id);
-    if( r.length > 0 ) {
-      this.User.hasReact = 'funny';
-      return;
-    }
-
-    r = this.blog.data.reacts.sad.filter(e => e== this.User.data._id);
-    if( r.length > 0 ) {
-      this.User.hasReact = 'sad';
-      return;
-    }
-
-    r = this.blog.data.reacts.informative.filter(e => e== this.User.data._id);
-    if( r.length > 0 ) {
-      this.User.hasReact = 'informative';
-      return;
-    }
 
     this.User.hasReact = null;
-      return;
+    const REACTS = ['like', 'love', 'sad', 'funny', 'informative']
+    let checkR = [];
+
+    REACTS.forEach(r => {
+      checkR = this.blog.data.reacts[r].filter(e => e == this.User.data._id);
+      if( checkR.length > 0 ) {
+        this.User.hasReact = r;
+      }
+    });
+
   }
 
 }

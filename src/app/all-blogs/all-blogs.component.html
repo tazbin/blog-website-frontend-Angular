@@ -1,7 +1,11 @@
 <div class="container blogSection">
     <div class="row py-5">
 
-        <div class="col-md-9 col-12">
+      <div class="col-md-9 col-12" *ngIf="allBlogs.loading || allBlogs.error">
+        {{ allBlogs.loading ? 'Loading...' : allBlogs.error }}
+      </div>
+
+        <div class="col-md-9 col-12" *ngIf="!allBlogs.loading && !allBlogs.error">
           <p *ngIf="!allBlogs.items.length">
             No blog found for the selected category!
           </p>
@@ -18,11 +22,6 @@
                         </li>
                     </ul>
                   </nav>
-
-                  <p *ngIf="allBlogs.error || allBlogs.loading">
-                    {{ allBlogs?.error }}
-                    {{ allBlogs.loading ? 'Loading...' : '' }}
-                </p>
 
                 <!-- blogs -->
                 <div class="row" *ngIf="!allBlogs.error && !allBlogs.loading">
