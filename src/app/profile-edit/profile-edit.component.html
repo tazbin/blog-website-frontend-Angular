@@ -24,7 +24,7 @@
 
                 <div class="mb-3">
                     <label for="formFileSm" class="form-label">
-                        {{ user.data.img ? 'Change profile picture': 'Upload profile picture' }}
+                        {{ user.data.img ? 'Change profile picture (Maxsize 1MB)': 'Upload profile picture (Maxsize 1MB)' }}
                     </label>
                     <input class="form-control form-control-sm" type="file" accept="image/*" (change)="fileChangeEvent($event)">
                     <small class="text-danger">

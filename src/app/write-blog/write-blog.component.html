@@ -15,7 +15,7 @@
 
                 <div class="mb-3">
                     <label for="formFileSm" class="form-label">
-                        {{ blog.data.img ? 'Change image' : 'Upload image' }}
+                        {{ blog.data.img ? 'Change image (Maxsize 3MB)' : 'Upload image (Maxsize 3MB)' }}
                     </label>
                     <input class="form-control form-control-sm" type="file" accept="image/*" (change)="fileChangeEvent($event)">
                     <small class="text-danger">
@@ -49,6 +49,10 @@
                         Fill this fiels
                     </small>
                   </div>
+
+                  <p *ngIf="blog.error" class="text-danger">
+                    {{ blog.error }}
+                  </p>
 
                 <button type="submit" class="btn btn-dark me-2" [disabled]="blogForm.invalid || blog.loading">
                     {{ blog.loading ? 'Saving blog...' : 'Save blog' }}
