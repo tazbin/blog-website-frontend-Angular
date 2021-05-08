@@ -32,8 +32,16 @@
             </p>
 
             <!-- blog -->
-            <p class="section-title"> 
+            <h3> 
                 {{ blog.data.title | titlecase }}
+            </h3>
+            <p>
+                <i class="me-2">
+                    <i class="fa fa-bookmark me-1" aria-hidden="true"></i> {{ blog.data.category.name | titlecase }}
+                </i>
+                <i>
+                    <i class="fa fa-calendar mx-1" aria-hidden="true"></i> {{ blog.data.posted }}
+                </i>
             </p>
             <p class="blogBody">
                 {{ blog.data.body }}
