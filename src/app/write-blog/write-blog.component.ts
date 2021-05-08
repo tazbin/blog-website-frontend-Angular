@@ -30,7 +30,7 @@ export class WriteBlogComponent implements OnInit {
         title: null,
         category: null,
         body: null,
-        img: null
+        img: ''
     }
   };
 
