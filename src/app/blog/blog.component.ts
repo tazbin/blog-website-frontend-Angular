@@ -99,7 +99,6 @@ export class BlogComponent implements OnInit, OnDestroy {
     this.blog.sub = this._blogService.getBlogDetails(blogId)
     .subscribe(res => {
 
-      console.log(res);
       this.blog.data = res;
       this.blog.loading = false;
       this.checkHasReact();
