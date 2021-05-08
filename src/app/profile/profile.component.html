@@ -75,7 +75,7 @@
     
                     <!-- blogs -->
                     <p *ngIf="!bloggerAllBlogs.items.length">
-                        No blogs found!
+                        <i class="fa fa-exclamation-triangle me-2" aria-hidden="true"></i> No blogs found!
                       </p>
 
                     <div class="col-md-4 col-12" *ngFor="let blog of bloggerAllBlogs.items">

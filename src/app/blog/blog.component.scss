@@ -86,3 +86,13 @@
     padding-top: 70px;
     padding-bottom: 330px;
 }
+
+@media only screen and (max-width: 400px) {
+    .img-section {
+        height: 200px;
+    }
+
+    .author{
+        display: none;
+    }
+}

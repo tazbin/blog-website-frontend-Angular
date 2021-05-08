@@ -5,9 +5,9 @@
         {{ allBlogs.loading ? 'Loading...' : allBlogs.error }}
       </div>
 
-        <div class="col-md-9 col-12" *ngIf="!allBlogs.loading && !allBlogs.error">
+        <div class="col-md-9 col-12 mb-2" *ngIf="!allBlogs.loading && !allBlogs.error">
           <p *ngIf="!allBlogs.items.length">
-            No blog found for the selected category!
+            <i class="fa fa-exclamation-triangle me-2" aria-hidden="true"></i> No blog found for the selected category!
           </p>
           
             <div class="row" *ngIf="allBlogs.items.length">

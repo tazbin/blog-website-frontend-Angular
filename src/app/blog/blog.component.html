@@ -9,7 +9,7 @@
 <div class="container" *ngIf="blog.data">
     <div class="row py-5">
 
-        <div class="col-md-2 col-12 author">
+        <div class="col-md-2 col-12 author mb-4">
             <p class="section-title"> <i class="fa fa-user-circle-o" aria-hidden="true"></i> Author</p>
             <div class="card">
                 <div class="card-body text-center">
@@ -111,7 +111,7 @@
             </form>
 
             <!-- blogs comments -->
-            <div class="row comments-section" *ngFor="let comment of blog.data.comments | reverseArray">
+            <div class="row comments-section mb-3" *ngFor="let comment of blog.data.comments | reverseArray">
                 <div class="col-md-2 col-3">
                     <div class="img">
                         <img [src]="apiUrl + comment.people.img" alt="">
