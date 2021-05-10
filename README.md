@@ -7,7 +7,7 @@
 
 <em> The backend of this project can be found [here (REST API)](https://github.com/tazbin/blog-website-backend_REST_API). </em>
 
-<em> Visit live project [lets-blog.netlify.app/all_blogs](https://lets-blog.netlify.app/all_blogs). </em>
+<em> Visit complete live project [lets-blog.netlify.app/all_blogs](https://lets-blog.netlify.app/all_blogs). </em>
 
 
 ## Features:
