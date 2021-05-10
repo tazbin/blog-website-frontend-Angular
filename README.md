@@ -5,9 +5,9 @@
 
 **blog-website** is one of my personal projects where registered blogger write blogs. Bloggers can also comment or react to blogs. This repository holds the code of it's frontend which is developed using **Angular**.
 
-<em> The backend of this project can be found [here (REST API)](https://github.com/tazbin/blog-website-backend_REST_API). </em>
+<em> The backend of this project can be found [here (REST API)](https://github.com/tazbin/blog-website-backend_REST_API) </em>
 
-<em> Visit complete live project [lets-blog.netlify.app/all_blogs](https://lets-blog.netlify.app/all_blogs). </em>
+<em> Visit complete live project [lets-blog.netlify.app/all_blogs](https://lets-blog.netlify.app/all_blogs) </em>
 
 
 ## Features:
