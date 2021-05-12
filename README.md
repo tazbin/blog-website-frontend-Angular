@@ -1,4 +1,4 @@
-# blog-website-frontend_Angular
+# blog-website-frontend-Angular
 ![alt text][logo]
 
 [logo]: src/assets/img/show.PNG "Frontend UI"
