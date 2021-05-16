@@ -15,6 +15,7 @@ import { BlogService } from '../services/blog.service';
 export class ProfileComponent implements OnInit {
 
   User: Observable<User>;
+  categoryId: string = 'all';
   bloggerProfile: UserProfile = {
     sub: null,
     error: null,
@@ -23,7 +24,7 @@ export class ProfileComponent implements OnInit {
         img: null,
         _id: null,
         email: null,
-        first_name: 'Bloggers',
+        first_name: null,
         last_name: null,
         role: null,
         joined: null,
@@ -54,8 +55,17 @@ export class ProfileComponent implements OnInit {
     this.User = this._authService.$User;
 
     this.bloggerProfile.data._id = this._route.snapshot.paramMap.get('bloggerId');
+
+    this._route.params.subscribe((params) => {
+      if( !params.categoryId ) {
+        this.categoryId = 'all';
+      } else {
+        this.categoryId = params.categoryId;
+      }
+      this.getBloggerBlogs(this.bloggerProfile.data._id, this.categoryId);
+    });
+
     this.getBloggerProfile(this.bloggerProfile.data._id);
-    this.getBloggerBlogs(this.bloggerProfile.data._id);
 
   }
 
@@ -84,12 +94,12 @@ export class ProfileComponent implements OnInit {
 
   }
 
-  getBloggerBlogs(bloggerId: string) {
+  getBloggerBlogs(bloggerId: string, categoryId: string) {
 
     this.bloggerAllBlogs.loading = true;
     this.bloggerAllBlogs.error = null;
     
-    this.bloggerAllBlogs.sub = this._blogService.getBloggerBlogs(bloggerId)
+    this.bloggerAllBlogs.sub = this._blogService.getblogList(bloggerId, categoryId)
     .subscribe((res:any) => {
 
       this.bloggerAllBlogs.items = res.result;
@@ -115,7 +125,7 @@ export class ProfileComponent implements OnInit {
     this.bloggerAllBlogs.loading = true;
     this.bloggerAllBlogs.error = null;
     
-    this.bloggerAllBlogs.sub = this._blogService.getBloggerBlogs(this.bloggerProfile.data._id, page)
+    this.bloggerAllBlogs.sub = this._blogService.getblogList(this.bloggerProfile.data._id, this.categoryId, page)
     .subscribe((res:any) => {
 
       this.bloggerAllBlogs.items = res.result;

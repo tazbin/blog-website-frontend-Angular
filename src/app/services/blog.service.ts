@@ -35,22 +35,15 @@ export class BlogService {
     );
   }
 
-  getAllBlogs(categoryId, page = 1) {
-    return this._http.get(`${environment.apiUrl}/blog/category/${categoryId}?page=${page}`)
-    .pipe(
-      catchError(err => this._errorService.handleError(err))
-    );
-  }
-
-  getBloggerBlogs(bloggerId, page = 1) {
-    return this._http.get(`${environment.apiUrl}/blog/blogger/${bloggerId}?page=${page}`)
+  getblogList(bloggerId, categoryId, page = 1) {
+    return this._http.get(`${environment.apiUrl}/blog/${bloggerId}/${categoryId}?page=${page}`)
     .pipe(
       catchError(err => this._errorService.handleError(err))
     );
   }
 
   getBlogDetails(blogId) {
-    return this._http.get(`${environment.apiUrl}/blog/${blogId}`)
+    return this._http.get(`${environment.apiUrl}/blog/details/${blogId}`)
     .pipe(
       catchError(err => this._errorService.handleError(err))
     );

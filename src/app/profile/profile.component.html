@@ -106,7 +106,13 @@
             </div>
 
         <div class="col-md-3 col-12">
-            <app-category-component [catId]="'no id'"></app-category-component>
+            <div *ngIf="!bloggerProfile.loading && bloggerProfile.data.first_name">
+                <app-category-component
+                [bloggerName]="bloggerProfile.data.first_name"
+                [bloggerId]="bloggerProfile.data._id"
+                [categoryId]="categoryId"
+                ></app-category-component>
+            </div>
         </div>
 
     </div>

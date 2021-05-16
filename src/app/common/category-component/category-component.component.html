@@ -1,9 +1,11 @@
-<p class="section-title"> <i class="fa fa-list-ul me-2" aria-hidden="true"></i> Blog category</p>
+<p class="section-title"> <i class="fa fa-list-ul me-2" aria-hidden="true"></i> {{ sectionTitle }} category</p>
 <p *ngIf="categories.loading || categories.error">
     {{ categories.loading ? 'Loading...' : '' }}
     {{ categories?.error }}
-  </p>
-  <ul class="list-group" *ngIf="!categories.loading && !categories.error">
+</p>
+
+<!-- for all blog page -->
+<ul class="list-group" *ngIf="bloggerId == 'all' && !categories.loading && !categories.error">
     <li class="list-group-item" [class.active]="categories.currentCategoryId == 'all'" routerLink="/all_blogs">
         All 
         <span class="badge bg-light ms-2">
@@ -11,6 +13,22 @@
         </span>
     </li>
     <li class="list-group-item" [class.active]="categories.currentCategoryId == category._id" [routerLink]="['/all_blogs', category._id]" *ngFor="let category of categories.items">
+        {{ category.name | titlecase }}
+        <span class="badge bg-secondary ms-2">
+            {{ category.count }}
+        </span>
+    </li>
+</ul>
+
+<!-- for profile page -->
+<ul class="list-group" *ngIf="bloggerId != 'all' && !categories.loading && !categories.error">
+    <li class="list-group-item" [class.active]="categories.currentCategoryId == 'all'" [routerLink]="['/profile', bloggerId]">
+        All 
+        <span class="badge bg-light ms-2">
+            {{ categories.totalBlogs }}
+        </span>
+    </li>
+    <li class="list-group-item" [class.active]="categories.currentCategoryId == category._id" [routerLink]="['/profile', bloggerId, category._id]" *ngFor="let category of categories.items">
         {{ category.name | titlecase }}
         <span class="badge bg-secondary ms-2">
             {{ category.count }}

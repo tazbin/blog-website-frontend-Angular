@@ -33,10 +33,11 @@ export class AllBlogsComponent implements OnInit {
       this._route.params.subscribe((params) => {
         if( !params.categoryId ) {
           this.currentCategoryId = 'all';
+          this.getAllBlogs();
         } else {
           this.currentCategoryId = params.categoryId;
+          this.getAllBlogs();
         }
-        this.getAllBlogs();
       });
 
   }
@@ -46,7 +47,7 @@ export class AllBlogsComponent implements OnInit {
     this.allBlogs.loading = true;
     this.allBlogs.error = null;
     
-    this.allBlogs.sub = this._blogService.getAllBlogs(this.currentCategoryId)
+    this.allBlogs.sub = this._blogService.getblogList('all', this.currentCategoryId)
     .subscribe((res:any) => {
 
       this.allBlogs.items = res.result;
@@ -71,7 +72,7 @@ export class AllBlogsComponent implements OnInit {
     this.allBlogs.loading = true;
     this.allBlogs.error = null;
 
-    this._blogService.getAllBlogs(this.currentCategoryId, page)
+    this._blogService.getblogList('all', this.currentCategoryId, page)
     .subscribe((res:any) => {
 
       this.allBlogs.items = res.result;

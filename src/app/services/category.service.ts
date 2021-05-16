@@ -21,8 +21,8 @@ export class CategoryService {
     );
   }
 
-  getCategorizedBlogCount() {
-    return this._http.get(`${environment.apiUrl}/category/categorizedBlogs`)
+  getCategorizedBlogCount(bloggerId = 'all') {
+    return this._http.get(`${environment.apiUrl}/category/categorizedBlogs/${bloggerId}`)
     .pipe(
       catchError(err => this._errorService.handleError(err))
     )

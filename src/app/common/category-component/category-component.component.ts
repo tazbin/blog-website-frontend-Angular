@@ -10,8 +10,11 @@ import { CategoryService } from 'src/app/services/category.service';
 })
 export class CategoryComponentComponent implements OnInit {
 
-  @Input() catId: string;
+  @Input() categoryId: string;
+  @Input() bloggerName: string;
+  @Input() bloggerId: string;
 
+  sectionTitle: string;
   categories: CategoriesModel = {
     sub: null,
     error: null,
@@ -29,8 +32,23 @@ export class CategoryComponentComponent implements OnInit {
 
   ngOnInit(): void {
 
+    if( this.bloggerName ){
+      this.sectionTitle = this.bloggerName + "'s";
+    } else {
+      this.sectionTitle = 'Blog'
+    }
+
+    if( !this.bloggerId ) {
+      this.bloggerId = 'all';
+    }
+
+    if( !this.categoryId ) {
+      this.categoryId = 'all';
+    }
+
     this._route.params.subscribe((params) => {
-      if( !params.categoryId && !this.catId ) {
+
+      if( !params.categoryId ) {
         this.categories.currentCategoryId = 'all';
       } else {
         this.categories.currentCategoryId = params.categoryId;
@@ -44,7 +62,7 @@ export class CategoryComponentComponent implements OnInit {
     this.categories.loading = true;
     this.categories.error = null;
 
-    this.categories.sub = this._categoryService.getCategorizedBlogCount()
+    this.categories.sub = this._categoryService.getCategorizedBlogCount(this.bloggerId)
     .subscribe((res:any) => {
 
       this.categories.items = res;

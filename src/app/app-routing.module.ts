@@ -33,6 +33,10 @@ const routes: Routes = [
     component: ProfileComponent
   },
   {
+    path: 'profile/:bloggerId/:categoryId',
+    component: ProfileComponent
+  },
+  {
     path: 'write_blog',
     component: WriteBlogComponent,
     canActivate: [AuthGuard]
