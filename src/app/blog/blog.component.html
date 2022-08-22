@@ -114,7 +114,7 @@
             <div class="row comments-section mb-3" *ngFor="let comment of blog.data.comments | reverseArray">
                 <div class="col-md-2 col-3">
                     <div class="img">
-                        <img [src]="apiUrl + comment.people.img" alt="">
+                        <img [src]="comment.people.img" alt="">
                     </div>
                 </div>
 
